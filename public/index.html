@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phyllotaxis Shader with GlslCanvas</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;
+      background: black;
+    }
+    canvas.glslCanvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Canvas with class and data-fragment-url attribute to load shader.frag -->
+  <canvas class="glslCanvas" data-fragment-url="shader.frag"></canvas>
+
+  <!-- Load GlslCanvas.js library from official repo -->
+  <script type="text/javascript" src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"></script>
+
+  <script>
+    // On window load, instantiate all canvases with class 'glslCanvas'
+    window.onload = () => {
+      // glslCanvas automatically initializes canvases with class glslCanvas
+      // but we can still explicitly create an instance if we want:
+
+      const canvas = document.querySelector('canvas.glslCanvas');
+      if (canvas) {
+        window.glslCanvas = new GlslCanvas(canvas);
+
+        // Optionally set uniforms or handle mouse, resize, etc.
+        window.addEventListener('resize', () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          glslCanvas.resize();
+        });
+        // Initial resize:
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        glslCanvas.resize();
+      }
+    };
+  </script>
+
+</body>
+</html>
+
