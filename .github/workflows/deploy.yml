@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Deploy Node.js App
 
 on:
   push:
@@ -9,30 +9,21 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
-    concurrency: ci-${{ github.ref }}
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout code 🛎️
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: Setup Node.js 🔧
         uses: actions/setup-node@v3
         with:
           node-version: '18' # or your preferred version
 
-      - name: Install dependencies 🔧
+      - name: Install dependencies 📦
         run: npm install
 
-      - name: Build TypeScript project 🏗️
-        run: npm run build
-
-      - name: Upload production-ready files
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist
-
-      # You could deploy to platforms like Render, Heroku, or others here
-      # GitHub Pages is for static sites only, not Express servers
+      - name: Start app (for testing or deployment step) 🚀
+        run: |
+          npm start
