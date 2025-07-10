@@ -19,11 +19,10 @@ jobs:
       - name: Setup Node.js 🔧
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # or your preferred version
+          node-version: '18'
 
       - name: Install dependencies 📦
         run: npm install
 
-      - name: Start app (for testing or deployment step) 🚀
-        run: |
-          npm start
+      - name: Start app (for test or debug) 🚀
+        run: npm start
